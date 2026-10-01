@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const BACKEND_URL = "https://cinescope-fk07.onrender.com";
-const TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -34,7 +34,7 @@ function MovieDetails() {
         setLoading(true);
         setError("");
 
-        const [movieResponse, castResponse, similarResponse, videoResponse] =
+        const [movieRes, castRes, similarRes, videoRes] =
           await Promise.all([
             fetch(`${BACKEND_URL}/api/movies/${id}`),
             fetch(`${BACKEND_URL}/api/cast/${id}`),
@@ -42,12 +42,12 @@ function MovieDetails() {
             fetch(`${BACKEND_URL}/api/movies/${id}/videos`),
           ]);
 
-        const movieData = await movieResponse.json();
-        const castData = await castResponse.json();
-        const similarData = await similarResponse.json();
-        const videoData = await videoResponse.json();
+        const movieData = await movieRes.json();
+        const castData = await castRes.json();
+        const similarData = await similarRes.json();
+        const videoData = await videoRes.json();
 
-        if (!movieResponse.ok) {
+        if (!movieRes.ok) {
           throw new Error(
             movieData.message || "Failed to load movie"
           );
@@ -55,7 +55,11 @@ function MovieDetails() {
 
         setMovie(movieData);
 
-        setCast((castData.cast || []).slice(0, 12));
+        setCast(
+          (castData.cast || [])
+            .filter((actor) => actor.profile_path)
+            .slice(0, 12)
+        );
 
         setSimilar(
           (similarData.results || [])
@@ -83,35 +87,30 @@ function MovieDetails() {
 
         setTrailer(selectedTrailer || null);
 
-        // Recently Viewed
         try {
-          const oldMovies =
+          const recent =
             JSON.parse(
               localStorage.getItem("recentlyViewed")
             ) || [];
 
-          const filteredMovies = oldMovies.filter(
+          const filtered = recent.filter(
             (item) => item.id !== movieData.id
           );
 
-          const updatedMovies = [
-            movieData,
-            ...filteredMovies,
-          ].slice(0, 12);
-
           localStorage.setItem(
             "recentlyViewed",
-            JSON.stringify(updatedMovies)
+            JSON.stringify(
+              [movieData, ...filtered].slice(0, 12)
+            )
           );
         } catch (storageError) {
           console.error(
-            "Recently viewed storage error:",
+            "Recently viewed error:",
             storageError
           );
         }
       } catch (err) {
         console.error("Movie Details Error:", err);
-
         setError(
           err.message || "Something went wrong"
         );
@@ -147,7 +146,6 @@ function MovieDetails() {
           "Watch Provider Error:",
           err
         );
-
         setProviders(null);
       } finally {
         setProviderLoading(false);
@@ -165,26 +163,16 @@ function MovieDetails() {
     };
 
     if (navigator.share) {
-      navigator
-        .share(shareData)
-        .catch(() => {});
+      navigator.share(shareData).catch(() => {});
       return;
     }
 
     if (navigator.clipboard) {
       navigator.clipboard
         .writeText(window.location.href)
-        .then(() => {
-          alert("Movie link copied!");
-        })
-        .catch(() => {
-          alert("Could not copy link.");
-        });
-
-      return;
+        .then(() => alert("Movie link copied!"))
+        .catch(() => alert("Could not copy link."));
     }
-
-    alert("Sharing is not supported.");
   }
 
   function formatMoney(amount) {
@@ -193,47 +181,30 @@ function MovieDetails() {
     }
 
     if (amount >= 1000000000) {
-      return `$${(
-        amount / 1000000000
-      ).toFixed(2)}B`;
+      return `$${(amount / 1000000000).toFixed(2)}B`;
     }
 
     if (amount >= 1000000) {
-      return `$${(
-        amount / 1000000
-      ).toFixed(2)}M`;
+      return `$${(amount / 1000000).toFixed(2)}M`;
     }
 
     if (amount >= 1000) {
-      return `$${(
-        amount / 1000
-      ).toFixed(0)}K`;
+      return `$${(amount / 1000).toFixed(0)}K`;
     }
 
     return `$${amount}`;
   }
 
   function formatNumber(number) {
-    if (
-      number === null ||
-      number === undefined
-    ) {
+    if (number === null || number === undefined) {
       return "N/A";
     }
 
-    return new Intl.NumberFormat(
-      "en-US"
-    ).format(number);
+    return new Intl.NumberFormat("en-US").format(number);
   }
 
-  function ProviderGroup({
-    title,
-    providersList,
-  }) {
-    if (
-      !providersList ||
-      providersList.length === 0
-    ) {
+  function ProviderGroup({ title, providersList }) {
+    if (!providersList || providersList.length === 0) {
       return null;
     }
 
@@ -258,9 +229,7 @@ function MovieDetails() {
                 </div>
               )}
 
-              <p>
-                {provider.provider_name}
-              </p>
+              <p>{provider.provider_name}</p>
             </div>
           ))}
         </div>
@@ -299,7 +268,7 @@ function MovieDetails() {
   return (
     <div className="page-container movie-details-page">
 
-      {/* BACK BUTTON */}
+      {/* BACK */}
       <button
         className="back-button"
         onClick={() => navigate(-1)}
@@ -308,12 +277,11 @@ function MovieDetails() {
       </button>
 
       {/* MOVIE DETAILS */}
-      <section className="movie-details">
-
+      <section className="movie-details-content">
         <div className="movie-details-poster">
           {movie.poster_path ? (
             <img
-              src={`${TMDB_IMAGE_URL}${movie.poster_path}`}
+              src={`${IMAGE_URL}${movie.poster_path}`}
               alt={movie.title}
             />
           ) : (
@@ -324,7 +292,6 @@ function MovieDetails() {
         </div>
 
         <div className="movie-details-info">
-
           <h1>{movie.title}</h1>
 
           {movie.tagline && (
@@ -333,8 +300,7 @@ function MovieDetails() {
             </p>
           )}
 
-          <div className="details-meta">
-
+          <div className="movie-details-meta">
             <span>
               ⭐{" "}
               {movie.vote_average
@@ -352,157 +318,95 @@ function MovieDetails() {
                 ⏱️ {movie.runtime} min
               </span>
             )}
-
           </div>
 
           {movie.genres?.length > 0 && (
-            <div className="genre-list">
-
+            <div className="movie-genres">
               {movie.genres.map((genre) => (
                 <span key={genre.id}>
                   {genre.name}
                 </span>
               ))}
-
             </div>
           )}
 
-          <h2>Overview</h2>
-
-          <p className="movie-overview">
+          <p className="movie-details-overview">
             {movie.overview ||
               "No overview available."}
           </p>
 
-          <button
-            className="share-button"
-            onClick={handleShare}
-          >
-            🔗 Share Movie
-          </button>
-
+          <div className="movie-details-actions">
+            <button onClick={handleShare}>
+              🔗 Share Movie
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* MOVIE STATISTICS */}
-      <section className="movie-statistics">
+      {/* STATISTICS */}
+      <section className="details-section">
+        <h2>📊 Movie Statistics</h2>
 
-        <div className="stats-heading">
-          <h2>📊 Movie Statistics</h2>
-          <p>
-            Detailed information about this movie.
-          </p>
-        </div>
-
-        <div className="stats-grid">
-
+        <div className="statistics-grid">
           <div className="stat-card">
-            <div className="stat-icon">⭐</div>
-
-            <div>
-              <p className="stat-label">
-                TMDB Rating
-              </p>
-
-              <h3>
-                {movie.vote_average
-                  ? movie.vote_average.toFixed(1)
-                  : "N/A"}
-
-                <span>/ 10</span>
-              </h3>
-            </div>
+            <p>TMDB Rating</p>
+            <h3>
+              ⭐{" "}
+              {movie.vote_average
+                ? movie.vote_average.toFixed(1)
+                : "N/A"}
+              <span>/10</span>
+            </h3>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">👥</div>
-
-            <div>
-              <p className="stat-label">
-                Vote Count
-              </p>
-
-              <h3>
-                {formatNumber(
-                  movie.vote_count
-                )}
-              </h3>
-            </div>
+            <p>Vote Count</p>
+            <h3>
+              {formatNumber(movie.vote_count)}
+            </h3>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">🔥</div>
-
-            <div>
-              <p className="stat-label">
-                Popularity
-              </p>
-
-              <h3>
-                {movie.popularity
-                  ? Number(
-                      movie.popularity
-                    ).toFixed(1)
-                  : "N/A"}
-              </h3>
-            </div>
+            <p>Popularity</p>
+            <h3>
+              {movie.popularity
+                ? Number(
+                    movie.popularity
+                  ).toFixed(1)
+                : "N/A"}
+            </h3>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">💵</div>
-
-            <div>
-              <p className="stat-label">
-                Budget
-              </p>
-
-              <h3>
-                {formatMoney(movie.budget)}
-              </h3>
-            </div>
+            <p>Budget</p>
+            <h3>
+              {formatMoney(movie.budget)}
+            </h3>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">💰</div>
-
-            <div>
-              <p className="stat-label">
-                Revenue
-              </p>
-
-              <h3>
-                {formatMoney(movie.revenue)}
-              </h3>
-            </div>
+            <p>Revenue</p>
+            <h3>
+              {formatMoney(movie.revenue)}
+            </h3>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">⏱️</div>
-
-            <div>
-              <p className="stat-label">
-                Runtime
-              </p>
-
-              <h3>
-                {movie.runtime
-                  ? `${movie.runtime} min`
-                  : "N/A"}
-              </h3>
-            </div>
+            <p>Runtime</p>
+            <h3>
+              {movie.runtime
+                ? `${movie.runtime} min`
+                : "N/A"}
+            </h3>
           </div>
-
         </div>
       </section>
 
       {/* WHERE TO WATCH */}
-      <section className="where-to-watch">
-
+      <section className="details-section where-to-watch">
         <div className="watch-header">
-
           <div>
             <h2>📺 Where to Watch</h2>
-
             <p>
               Find where this movie is available.
             </p>
@@ -510,10 +414,8 @@ function MovieDetails() {
 
           <select
             value={selectedCountry}
-            onChange={(event) =>
-              setSelectedCountry(
-                event.target.value
-              )
+            onChange={(e) =>
+              setSelectedCountry(e.target.value)
             }
           >
             {countries.map((country) => (
@@ -525,7 +427,6 @@ function MovieDetails() {
               </option>
             ))}
           </select>
-
         </div>
 
         {providerLoading ? (
@@ -537,28 +438,22 @@ function MovieDetails() {
             <h3>
               Unable to load watch options
             </h3>
-
             <p>
               Please try refreshing the page.
             </p>
           </div>
         ) : !currentProviders ? (
           <div className="provider-empty">
-
             <h3>
               No watch options found
             </h3>
-
             <p>
-              This movie currently has no
-              available providers for{" "}
-              {selectedCountry}.
+              This movie currently has no available
+              providers for {selectedCountry}.
             </p>
-
           </div>
         ) : (
-          <div>
-
+          <>
             <ProviderGroup
               title="▶ Stream"
               providersList={
@@ -597,20 +492,17 @@ function MovieDetails() {
                 🔎 View All Watch Options
               </a>
             )}
-
-          </div>
+          </>
         )}
 
         <p className="provider-attribution">
           Availability data powered by JustWatch.
         </p>
-
       </section>
 
       {/* TRAILER */}
       {trailer?.key && (
-        <section className="trailer-section">
-
+        <section className="details-section trailer-section">
           <h2>🎬 Trailer</h2>
 
           <div className="trailer-container">
@@ -618,67 +510,48 @@ function MovieDetails() {
               src={`https://www.youtube.com/embed/${trailer.key}`}
               title={`${movie.title} Trailer`}
               allowFullScreen
-            ></iframe>
+            />
           </div>
-
         </section>
       )}
 
       {/* CAST */}
-      <section className="cast-section">
-
+      <section className="details-section cast-section">
         <h2>🎭 Cast & Crew</h2>
 
         {cast.length === 0 ? (
-          <p>
-            No cast information available.
-          </p>
+          <p>No cast information available.</p>
         ) : (
           <div className="cast-grid">
-
             {cast.map((actor) => (
               <div
                 className="cast-card"
                 key={actor.id}
                 onClick={() =>
-                  navigate(
-                    `/actor/${actor.id}`
-                  )
+                  navigate(`/actor/${actor.id}`)
                 }
               >
-
-                {actor.profile_path ? (
-                  <img
-                    src={`${TMDB_IMAGE_URL}${actor.profile_path}`}
-                    alt={actor.name}
-                  />
-                ) : (
-                  <div className="cast-no-image">
-                    No Image
-                  </div>
-                )}
+                <img
+                  src={`${IMAGE_URL}${actor.profile_path}`}
+                  alt={actor.name}
+                  loading="lazy"
+                />
 
                 <div className="cast-info">
-
                   <h3>{actor.name}</h3>
-
                   <p>
                     {actor.character ||
                       "Unknown role"}
                   </p>
-
                 </div>
               </div>
             ))}
-
           </div>
         )}
-
       </section>
 
       {/* SIMILAR MOVIES */}
-      <section className="similar-section">
-
+      <section className="details-section similar-section">
         <h2>🎥 Similar Movies</h2>
 
         {similar.length === 0 ? (
@@ -687,26 +560,21 @@ function MovieDetails() {
           </p>
         ) : (
           <div className="similar-grid">
-
             {similar.map((item) => (
               <div
                 className="similar-card"
                 key={item.id}
                 onClick={() =>
-                  navigate(
-                    `/movie/${item.id}`
-                  )
+                  navigate(`/movie/${item.id}`)
                 }
               >
-
                 <img
-                  src={`${TMDB_IMAGE_URL}${item.poster_path}`}
+                  src={`${IMAGE_URL}${item.poster_path}`}
                   alt={item.title}
                   loading="lazy"
                 />
 
                 <div className="similar-info">
-
                   <h3>{item.title}</h3>
 
                   <p>
@@ -716,22 +584,17 @@ function MovieDetails() {
                       : "N/A"}
                   </p>
 
-                  <p>
-                    📅{" "}
-                    {item.release_date ||
-                      "Unknown"}
-                  </p>
-
+                  {item.release_date && (
+                    <p>
+                      📅 {item.release_date}
+                    </p>
+                  )}
                 </div>
-
               </div>
             ))}
-
           </div>
         )}
-
       </section>
-
     </div>
   );
 }
