@@ -2332,3 +2332,42 @@ select {
     gap: 8px !important;
   }
 }
+@media (max-width: 650px) {
+  .cast-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .cast-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .cast-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cast-info {
+    padding: 5px !important;
+  }
+
+  .cast-info h3 {
+    font-size: 9px !important;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cast-info p {
+    font-size: 8px !important;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
