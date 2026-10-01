@@ -38,7 +38,7 @@ function GenreSections() {
         for (const genre of genreList) {
           try {
             const response = await fetch(
-              "http://localhost:5000/api/movies/discover" +
+              "https://cinescope-fk07.onrender.com/api/movies/discover" +
                 "?genre=" +
                 genre.id +
                 "&year=all" +

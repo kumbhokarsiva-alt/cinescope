@@ -10,7 +10,7 @@ function FeaturedMovie() {
     async function loadFeaturedMovie() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/movies/popular?page=1"
+          "https://cinescope-fk07.onrender.com/api/movies/popular?page=1"
         );
 
         const data = await response.json();

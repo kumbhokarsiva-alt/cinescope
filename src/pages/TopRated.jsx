@@ -19,7 +19,7 @@ function TopRated() {
         setError("");
 
         const response = await fetch(
-          "http://localhost:5000/api/top-rated?page=1"
+          "https://cinescope-fk07.onrender.com/api/top-rated?page=1"
         );
 
         const data = await response.json();
@@ -62,7 +62,7 @@ function TopRated() {
       setLoadingMore(true);
 
       const response = await fetch(
-        `http://localhost:5000/api/top-rated?page=${nextPage}`
+        `https://cinescope-fk07.onrender.com/api/top-rated?page=${nextPage}`
       );
 
       const data = await response.json();

@@ -57,19 +57,19 @@ function MovieDetails() {
         setError("");
 
         const movieResponse = await fetch(
-          `http://localhost:5000/api/movies/${id}`
+          `https://cinescope-fk07.onrender.com/api/movies/${id}`
         );
 
         const castResponse = await fetch(
-          `http://localhost:5000/api/cast/${id}`
+          `https://cinescope-fk07.onrender.com/api/cast/${id}`
         );
 
         const similarResponse = await fetch(
-          `http://localhost:5000/api/similar/${id}`
+          `https://cinescope-fk07.onrender.com/api/similar/${id}`
         );
 
         const videoResponse = await fetch(
-          `http://localhost:5000/api/movies/${id}/videos`
+          `https://cinescope-fk07.onrender.com/api/movies/${id}/videos`
         );
 
         const movieData =
@@ -179,7 +179,7 @@ function MovieDetails() {
         setProviderLoading(true);
 
         const response = await fetch(
-          `http://localhost:5000/api/movies/${id}/providers`
+          `https://cinescope-fk07.onrender.com/api/movies/${id}/providers`
         );
 
         const data =

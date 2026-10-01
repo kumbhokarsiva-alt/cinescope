@@ -17,7 +17,7 @@ function ActorDetails() {
         setError("");
 
         const response = await fetch(
-          `http://localhost:5000/api/person/${id}`
+          `https://cinescope-fk07.onrender.com/api/person/${id}`
         );
 
         const data = await response.json();

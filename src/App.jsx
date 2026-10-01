@@ -16,7 +16,7 @@ import ThemeToggle from "./ThemeToggle";
 import FeaturedMovie from "./components/FeaturedMovie";
 import SmartRecommendations from "./components/SmartRecommendations";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://cinescope-fk07.onrender.com/api";
 
 function Home() {
   const [movies, setMovies] = useState([]);

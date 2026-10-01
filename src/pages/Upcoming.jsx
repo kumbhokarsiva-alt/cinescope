@@ -21,7 +21,7 @@ function Upcoming() {
         setError("");
 
         const response = await fetch(
-          "http://localhost:5000/api/upcoming?page=1"
+          "https://cinescope-fk07.onrender.com/api/upcoming?page=1"
         );
 
         const data = await response.json();
@@ -73,7 +73,7 @@ function Upcoming() {
       setLoadingMore(true);
 
       const response = await fetch(
-        `http://localhost:5000/api/upcoming?page=${nextPage}`
+        `https://cinescope-fk07.onrender.com/api/upcoming?page=${nextPage}`
       );
 
       const data = await response.json();

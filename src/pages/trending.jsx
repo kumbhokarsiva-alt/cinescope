@@ -16,7 +16,7 @@ function Trending() {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/api/movies/trending"
+          "https://cinescope-fk07.onrender.com/api/movies/trending"
         );
 
         const data = await response.json();
