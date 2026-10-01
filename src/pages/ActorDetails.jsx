@@ -37,7 +37,8 @@ function ActorDetails() {
           .filter(
             (item) =>
               item.media_type === "movie" &&
-              item.id
+              item.id &&
+              item.poster_path
           )
           .filter(
             (item, index, array) =>
@@ -59,6 +60,7 @@ function ActorDetails() {
         setMovies(movieList);
       } catch (err) {
         console.error("Actor Details Error:", err);
+
         setError(
           err.message || "Something went wrong"
         );
@@ -88,13 +90,17 @@ function ActorDetails() {
           ← Go Back
         </button>
 
-        <h2>{error || "Actor not found"}</h2>
+        <h2>
+          {error || "Actor not found"}
+        </h2>
       </div>
     );
   }
 
   return (
     <div className="page-container actor-details-page">
+
+      {/* BACK BUTTON */}
       <button
         className="back-button"
         onClick={() => navigate(-1)}
@@ -102,13 +108,14 @@ function ActorDetails() {
         ← Go Back
       </button>
 
-      <section className="actor-profile">
-        <div className="actor-image-wrapper">
+      {/* ACTOR PROFILE */}
+      <section className="actor-header">
+
+        <div className="actor-profile-image">
           {actor.profile_path ? (
             <img
               src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
               alt={actor.name}
-              className="actor-profile-image"
             />
           ) : (
             <div className="actor-no-image">
@@ -118,6 +125,7 @@ function ActorDetails() {
         </div>
 
         <div className="actor-info">
+
           <p className="actor-label">
             🎭 ACTOR / CAST
           </p>
@@ -151,36 +159,37 @@ function ActorDetails() {
             {actor.biography ||
               "No biography available for this actor."}
           </p>
+
         </div>
       </section>
 
+      {/* ACTOR MOVIES */}
       <section className="actor-movies">
+
         <h2>🎬 Movies</h2>
 
         {movies.length === 0 ? (
           <p>No movies found.</p>
         ) : (
-          <div className="movie-grid">
+          <div className="actor-movies-grid">
+
             {movies.map((movie) => (
               <div
-                className="movie-card"
+                className="actor-movie-card"
                 key={movie.id}
                 onClick={() =>
                   navigate(`/movie/${movie.id}`)
                 }
               >
-                {movie.poster_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                  />
-                ) : (
-                  <div className="movie-no-image">
-                    No Image
-                  </div>
-                )}
 
-                <div className="movie-card-content">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  loading="lazy"
+                />
+
+                <div className="actor-movie-info">
+
                   <h3>{movie.title}</h3>
 
                   <p>
@@ -195,11 +204,15 @@ function ActorDetails() {
                     {movie.release_date ||
                       "Unknown"}
                   </p>
+
                 </div>
+
               </div>
             ))}
+
           </div>
         )}
+
       </section>
     </div>
   );
