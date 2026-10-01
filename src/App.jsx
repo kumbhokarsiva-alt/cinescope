@@ -14,14 +14,12 @@ import NotFound from "./pages/NotFound";
 
 import ThemeToggle from "./ThemeToggle";
 import FeaturedMovie from "./components/FeaturedMovie";
-import SmartRecommendations from "./components/SmartRecommendations";
 
 const API_BASE_URL = "https://cinescope-fk07.onrender.com/api";
 
 function Home() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("all");
   const [year, setYear] = useState("all");
@@ -191,7 +189,6 @@ function Home() {
 
   function handleSearch(event) {
     event.preventDefault();
-
     loadMovies(1, false);
   }
 
@@ -368,11 +365,6 @@ function Home() {
             </button>
           </div>
         </form>
-
-        <SmartRecommendations
-          query={search}
-          movies={movies}
-        />
 
         <section className="movie-section">
           <div className="section-heading">
