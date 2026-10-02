@@ -2402,3 +2402,56 @@ img {
     gap: 7px !important;
   }
 }
+
+/* ============================================
+   BIGGER MOBILE SEARCH BOX
+============================================ */
+
+@media (max-width: 600px) {
+  .search-box {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .search-box input {
+    flex: 1 !important;
+    width: auto !important;
+    min-width: 0 !important;
+
+    height: 54px !important;
+    padding: 0 17px !important;
+
+    font-size: 15px !important;
+
+    border-radius: 10px !important;
+  }
+
+  .search-box button {
+    flex-shrink: 0 !important;
+
+    width: 105px !important;
+    height: 54px !important;
+
+    padding: 0 12px !important;
+
+    font-size: 13px !important;
+
+    border-radius: 10px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .search-box input {
+    height: 52px !important;
+    font-size: 14px !important;
+  }
+
+  .search-box button {
+    width: 95px !important;
+    height: 52px !important;
+    font-size: 12px !important;
+  }
+}
