@@ -1,6 +1,6 @@
 /* =====================================================
-   CINESCOPE - CLEAN FULL APP CSS
-   ===================================================== */
+   CINESCOPE - FINAL CLEAN APP.CSS
+===================================================== */
 
 /* =====================================================
    RESET
@@ -13,8 +13,8 @@
 }
 
 html {
-  background: #0b0b0f;
   scroll-behavior: smooth;
+  background: #0b0b0f;
 }
 
 body {
@@ -30,11 +30,16 @@ body {
   min-height: 100vh;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 button,
 input,
 select,
 textarea {
-  font: inherit;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
@@ -43,12 +48,12 @@ button {
 
 img {
   max-width: 100%;
+  display: block;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+/* =====================================================
+   APP
+===================================================== */
 
 .app {
   width: 100%;
@@ -68,7 +73,7 @@ a {
   width: 100%;
 
   background: #0b0b0f;
-  border-bottom: 1px solid #22222a;
+  border-bottom: 1px solid #25252d;
 }
 
 .navbar-inner {
@@ -79,6 +84,7 @@ a {
 
   display: flex;
   align-items: center;
+
   gap: 18px;
 }
 
@@ -88,17 +94,18 @@ a {
   color: #ffffff;
   font-size: 25px;
   font-weight: 800;
+
   white-space: nowrap;
 }
 
 .nav-links {
   flex: 1;
+  min-width: 0;
 
   display: flex;
   align-items: center;
-  gap: 5px;
 
-  min-width: 0;
+  gap: 5px;
 
   overflow-x: auto;
   overflow-y: hidden;
@@ -115,11 +122,15 @@ a {
 
   min-height: 36px;
 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 8px 11px;
 
   border-radius: 7px;
 
-  color: #a4a4af;
+  color: #a2a2ad;
 
   font-size: 12px;
   line-height: 1;
@@ -128,25 +139,26 @@ a {
 }
 
 .nav-link:hover {
-  background: #18181e;
+  background: #1a1a21;
   color: #ffffff;
 }
 
 .nav-link.active {
-  background: #24242b;
+  background: #25252d;
   color: #ffffff;
 }
 
+/* Theme Toggle */
 .theme-toggle {
   flex-shrink: 0;
 
   width: 38px;
   height: 38px;
 
-  border: 1px solid #303039;
-  border-radius: 7px;
+  border: 1px solid #33333c;
+  border-radius: 8px;
 
-  background: #17171d;
+  background: #16161c;
   color: #ffffff;
 }
 
@@ -174,13 +186,10 @@ a {
   width: 100%;
   height: 100%;
 
-  display: block;
-
   object-fit: cover;
   object-position: center;
 }
 
-/* Only the hero/featured section gets an intentional overlay */
 .featured-overlay {
   position: absolute;
   inset: 0;
@@ -188,15 +197,15 @@ a {
   background:
     linear-gradient(
       90deg,
-      rgba(8, 8, 12, 0.95) 0%,
-      rgba(8, 8, 12, 0.72) 38%,
-      rgba(8, 8, 12, 0.25) 72%,
-      rgba(8, 8, 12, 0.05) 100%
+      rgba(7, 7, 10, 0.95) 0%,
+      rgba(7, 7, 10, 0.72) 38%,
+      rgba(7, 7, 10, 0.24) 72%,
+      rgba(7, 7, 10, 0.05) 100%
     ),
     linear-gradient(
       0deg,
-      rgba(8, 8, 12, 0.85),
-      transparent 55%
+      rgba(7, 7, 10, 0.88),
+      transparent 60%
     );
 }
 
@@ -215,9 +224,11 @@ a {
 }
 
 .featured-label {
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 
-  font-size: 12px;
+  color: #d0d0d8;
+
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -239,15 +250,17 @@ a {
   margin-bottom: 14px;
 
   color: #d0d0d8;
+
   font-size: 13px;
 }
 
 .featured-overview {
-  max-width: 620px;
+  max-width: 650px;
 
   margin-bottom: 20px;
 
-  color: #bcbcc6;
+  color: #b7b7c2;
+
   font-size: 14px;
   line-height: 1.65;
 }
@@ -263,7 +276,7 @@ a {
   background: #ffffff;
   color: #111111;
 
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -291,6 +304,7 @@ a {
 
 .home-header p {
   color: #92929d;
+
   font-size: 13px;
 }
 
@@ -299,35 +313,42 @@ a {
 ===================================================== */
 
 .filter-panel {
+  width: 100%;
+
   margin-bottom: 28px;
+  padding: 15px;
 
-  padding: 14px;
-
-  border: 1px solid #28282f;
-  border-radius: 9px;
+  border: 1px solid #2a2a32;
+  border-radius: 10px;
 
   background: #111116;
 }
 
+/* SEARCH */
 .search-box {
   position: relative;
 
-  display: flex;
-  gap: 8px;
+  width: 100%;
 
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 12px;
 }
 
 .search-box input {
   flex: 1;
-
   min-width: 0;
-  height: 42px;
 
-  padding: 0 13px;
+  width: 100%;
+  height: 46px;
 
-  border: 1px solid #303039;
-  border-radius: 7px;
+  padding: 0 14px;
+
+  border: 1px solid #33333d;
+  border-radius: 8px;
 
   outline: none;
 
@@ -338,49 +359,52 @@ a {
 }
 
 .search-box input::placeholder {
-  color: #6e6e78;
+  color: #6f6f7a;
 }
 
 .search-box input:focus {
-  border-color: #555560;
+  border-color: #565661;
 }
 
 .search-box button {
   flex-shrink: 0;
 
-  height: 42px;
+  height: 46px;
 
   padding: 0 18px;
 
   border: 0;
-  border-radius: 7px;
+  border-radius: 8px;
 
   background: #ffffff;
   color: #111111;
 
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
+/* FILTERS */
 .filters-row {
+  width: 100%;
+
   display: grid;
 
   grid-template-columns:
     repeat(4, minmax(0, 1fr))
-    70px;
+    80px;
 
-  gap: 8px;
+  gap: 9px;
 }
 
 .filters-row select {
   width: 100%;
   min-width: 0;
-  height: 39px;
+  height: 43px;
 
-  padding: 0 9px;
+  padding: 0 11px;
 
-  border: 1px solid #303039;
-  border-radius: 7px;
+  border: 1px solid #33333d;
+  border-radius: 8px;
 
   outline: none;
 
@@ -390,11 +414,16 @@ a {
   font-size: 12px;
 }
 
-.clear-filter-btn {
-  height: 39px;
+.filters-row select:focus {
+  border-color: #555560;
+}
 
-  border: 1px solid #303039;
-  border-radius: 7px;
+.clear-filter-btn {
+  width: 100%;
+  height: 43px;
+
+  border: 1px solid #35353e;
+  border-radius: 8px;
 
   background: #24242b;
   color: #ffffff;
@@ -403,7 +432,7 @@ a {
 }
 
 /* =====================================================
-   SEARCH AUTOCOMPLETE
+   AUTOCOMPLETE
 ===================================================== */
 
 .autocomplete-search {
@@ -417,15 +446,15 @@ a {
   left: 0;
   right: 0;
 
-  z-index: 2000;
+  z-index: 3000;
 
-  max-height: 420px;
+  max-height: 400px;
 
   overflow-y: auto;
 
   padding: 6px;
 
-  border: 1px solid #2d2d35;
+  border: 1px solid #303039;
   border-radius: 10px;
 
   background: #15151b;
@@ -453,7 +482,7 @@ a {
 }
 
 .autocomplete-item:hover {
-  background: #202027;
+  background: #212127;
 }
 
 .autocomplete-item img {
@@ -472,9 +501,10 @@ a {
 }
 
 .autocomplete-info h4 {
-  margin-bottom: 5px;
+  margin: 0 0 5px;
 
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 1.3;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -487,11 +517,12 @@ a {
 }
 
 .autocomplete-message {
-  padding: 15px;
+  padding: 14px;
 
-  color: #92929d;
+  color: #91919c;
 
   text-align: center;
+
   font-size: 12px;
 }
 
@@ -499,26 +530,28 @@ a {
    SECTION HEADINGS
 ===================================================== */
 
-.movie-section {
-  width: 100%;
+.section-heading,
+.section-header {
+  margin-bottom: 18px;
 }
 
-.section-heading {
-  margin-bottom: 17px;
-}
-
-.section-heading h2 {
+.section-heading h2,
+.section-header h2 {
   margin-bottom: 5px;
+
   font-size: 22px;
+  line-height: 1.2;
 }
 
-.section-heading p {
-  color: #92929d;
+.section-heading p,
+.section-header p {
+  color: #91919c;
+
   font-size: 12px;
 }
 
 /* =====================================================
-   MAIN MOVIE GRID
+   MOVIE GRID
 ===================================================== */
 
 .movie-grid {
@@ -542,19 +575,22 @@ a {
 
   overflow: hidden;
 
-  border: 1px solid #28282f;
+  border: 1px solid #292930;
   border-radius: 8px;
 
   background: #17171d;
 
+  cursor: pointer;
+
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .movie-card:hover {
   transform: translateY(-4px);
-  border-color: #51515b;
+
+  border-color: #50505a;
 }
 
 /* =====================================================
@@ -571,21 +607,7 @@ a {
 
   overflow: hidden;
 
-  background: #16161c;
-}
-
-/*
-   IMPORTANT:
-   No dark overlay.
-   The actual movie image remains fully visible.
-*/
-
-.movie-poster-wrapper::before,
-.movie-poster-wrapper::after,
-.poster-wrapper::before,
-.poster-wrapper::after {
-  content: none !important;
-  display: none !important;
+  background: #1a1a21;
 }
 
 .movie-poster-wrapper img,
@@ -599,11 +621,23 @@ a {
   object-position: center;
 
   opacity: 1;
+
   filter: none;
 }
 
+/* no unwanted black overlay */
+.movie-poster-wrapper::before,
+.movie-poster-wrapper::after,
+.poster-wrapper::before,
+.poster-wrapper::after,
+.movie-card::before,
+.movie-card::after {
+  content: none !important;
+  display: none !important;
+}
+
 /* =====================================================
-   RATING
+   MOVIE RATING
 ===================================================== */
 
 .movie-rating {
@@ -612,26 +646,22 @@ a {
   top: 7px;
   left: 7px;
 
-  padding: 3px 6px;
+  padding: 4px 6px;
 
   border-radius: 5px;
 
-  /*
-    No black overlay behind the whole poster.
-    Rating itself stays readable.
-  */
   background: rgba(0, 0, 0, 0.68);
 
   color: #ffffff;
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
 
   line-height: 1;
 }
 
 /* =====================================================
-   MOVIE CARD CONTENT
+   MOVIE INFO
 ===================================================== */
 
 .movie-card-content,
@@ -645,14 +675,15 @@ a {
 .movie-info h3 {
   min-height: 34px;
 
-  margin-bottom: 5px;
+  margin: 0 0 5px;
 
   color: #ffffff;
 
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.35;
 
   overflow: hidden;
+
   text-overflow: ellipsis;
 
   display: -webkit-box;
@@ -662,14 +693,22 @@ a {
 
 .movie-card-content p,
 .movie-info p {
-  color: #777781;
+  margin: 0 0 3px;
+
+  color: #7e7e89;
 
   font-size: 10px;
 
   overflow: hidden;
+
   text-overflow: ellipsis;
+
   white-space: nowrap;
 }
+
+/* =====================================================
+   CARD ACTIONS
+===================================================== */
 
 .movie-card-actions {
   display: flex;
@@ -682,16 +721,16 @@ a {
 }
 
 .movie-card-actions button {
-  width: 30px;
-  height: 28px;
+  width: 29px;
+  height: 27px;
 
-  border: 1px solid #303039;
+  border: 1px solid #33333c;
   border-radius: 6px;
 
-  background: #1f1f27;
+  background: #202027;
   color: #ffffff;
 
-  font-size: 13px;
+  font-size: 12px;
 }
 
 /* =====================================================
@@ -708,11 +747,9 @@ a {
 }
 
 .skeleton-card {
-  width: 100%;
-
   overflow: hidden;
 
-  border: 1px solid #28282f;
+  border: 1px solid #292930;
   border-radius: 8px;
 
   background: #17171d;
@@ -725,33 +762,33 @@ a {
 
   background: linear-gradient(
     90deg,
-    #16161c 25%,
-    #24242c 50%,
-    #16161c 75%
+    #17171d 25%,
+    #25252d 50%,
+    #17171d 75%
   );
 
   background-size: 200% 100%;
 
-  animation: skeleton 1.3s infinite;
+  animation: skeleton-loading 1.3s infinite;
 }
 
 .skeleton-line {
-  width: 78%;
-  height: 11px;
+  width: 75%;
+  height: 10px;
 
   margin: 10px 9px 0;
 
   border-radius: 4px;
 
-  background: #28282f;
+  background: #2a2a32;
 }
 
 .skeleton-line.small {
-  width: 42%;
+  width: 45%;
   margin-bottom: 12px;
 }
 
-@keyframes skeleton {
+@keyframes skeleton-loading {
   0% {
     background-position: 200% 0;
   }
@@ -762,14 +799,15 @@ a {
 }
 
 /* =====================================================
-   NO RESULTS / EMPTY STATE
+   EMPTY / ERROR
 ===================================================== */
 
-.no-results,
-.empty-state {
-  padding: 60px 20px;
+.empty-state,
+.empty-favorites,
+.no-results {
+  padding: 55px 20px;
 
-  border: 1px solid #28282f;
+  border: 1px solid #292930;
   border-radius: 10px;
 
   background: #111116;
@@ -777,27 +815,27 @@ a {
   text-align: center;
 }
 
-.no-results-icon {
-  margin-bottom: 10px;
-  font-size: 40px;
-}
-
-.no-results h3,
-.empty-state h2 {
+.empty-state h2,
+.empty-favorites h3,
+.no-results h3 {
   margin-bottom: 8px;
 }
 
-.no-results p,
-.empty-state p {
+.empty-state p,
+.empty-favorites p,
+.no-results p {
   margin-bottom: 18px;
 
-  color: #91919c;
+  color: #92929d;
+
   font-size: 13px;
 }
 
+.empty-state button,
+.empty-favorites button,
 .no-results button,
-.empty-state button {
-  padding: 10px 17px;
+.load-more {
+  padding: 10px 16px;
 
   border: 0;
   border-radius: 7px;
@@ -807,6 +845,37 @@ a {
 
   font-size: 12px;
   font-weight: 700;
+}
+
+/* =====================================================
+   PAGE CONTAINERS
+===================================================== */
+
+.page-container {
+  width: min(1200px, calc(100% - 32px));
+
+  min-height: 70vh;
+
+  margin: 0 auto;
+
+  padding: 38px 0 55px;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin-bottom: 7px;
+
+  font-size: 29px;
+  line-height: 1.15;
+}
+
+.page-header p {
+  color: #92929d;
+
+  font-size: 13px;
 }
 
 /* =====================================================
@@ -816,111 +885,28 @@ a {
 .load-more-wrapper,
 .load-more-container {
   display: flex;
+
   justify-content: center;
 
   margin-top: 28px;
 }
 
-.load-more-btn,
-.load-more {
+.load-more-btn {
   padding: 10px 18px;
 
   border: 1px solid #363640;
   border-radius: 7px;
 
-  background: #18181f;
+  background: #19191f;
   color: #ffffff;
 
   font-size: 12px;
   font-weight: 700;
 }
 
-.load-more-btn:disabled,
-.load-more:disabled {
+.load-more-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
-
-/* =====================================================
-   GENERAL PAGES
-===================================================== */
-
-.page-container,
-.actor-page,
-.movies-page {
-  width: min(1200px, calc(100% - 32px));
-
-  min-height: 70vh;
-
-  margin: 0 auto;
-
-  padding: 40px 0 55px;
-}
-
-.page-container h1,
-.movies-page h1 {
-  margin-bottom: 7px;
-  font-size: 29px;
-}
-
-.page-container > p,
-.movies-page > p {
-  margin-bottom: 23px;
-  color: #92929d;
-}
-
-.page-header {
-  margin-bottom: 24px;
-}
-
-.page-header h1 {
-  margin-bottom: 7px;
-  font-size: 29px;
-  line-height: 1.15;
-}
-
-.page-header p {
-  color: #92929d;
-  font-size: 13px;
-}
-
-.page-status {
-  padding: 45px 15px;
-
-  color: #92929d;
-
-  text-align: center;
-  font-size: 13px;
-}
-
-.page-error {
-  padding: 45px 15px;
-
-  text-align: center;
-}
-
-.page-error h3 {
-  margin-bottom: 8px;
-}
-
-.page-error p {
-  margin-bottom: 15px;
-
-  color: #92929d;
-  font-size: 13px;
-}
-
-.page-error button {
-  padding: 9px 15px;
-
-  border: 0;
-  border-radius: 7px;
-
-  background: #ffffff;
-  color: #111111;
-
-  font-size: 12px;
-  font-weight: 700;
 }
 
 /* =====================================================
@@ -933,66 +919,17 @@ a {
   overflow-x: hidden;
 }
 
-.movie-details-hero {
-  position: relative;
-
-  width: 100%;
-  min-height: 560px;
-
-  overflow: hidden;
-
-  background: #09090d;
-}
-
-.movie-details-backdrop {
-  position: absolute;
-  inset: 0;
-}
-
-.movie-details-backdrop img {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-}
-
-/* Hero backdrop overlay only */
-.movie-details-overlay {
-  position: absolute;
-  inset: 0;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(7, 7, 10, 0.95),
-      rgba(7, 7, 10, 0.7),
-      rgba(7, 7, 10, 0.2)
-    ),
-    linear-gradient(
-      0deg,
-      rgba(7, 7, 10, 0.9),
-      transparent 55%
-    );
-}
-
 .movie-details-content {
-  position: relative;
-  z-index: 2;
-
   width: min(1200px, calc(100% - 32px));
-
-  min-height: 560px;
 
   margin: 0 auto;
 
-  padding: 55px 0;
+  padding: 45px 0;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
-  gap: 32px;
+  gap: 30px;
 }
 
 .movie-details-poster {
@@ -1004,25 +941,25 @@ a {
 
 .movie-details-poster img {
   width: 100%;
-
   height: auto;
-
-  display: block;
 
   aspect-ratio: 2 / 3;
 
+  display: block;
+
   object-fit: cover;
 
-  border-radius: 10px;
+  border-radius: 9px;
 }
 
 .movie-details-info {
   min-width: 0;
-  max-width: 700px;
+
+  max-width: 760px;
 }
 
 .movie-details-info h1 {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 
   font-size: clamp(34px, 4.5vw, 56px);
   line-height: 1.05;
@@ -1031,74 +968,58 @@ a {
 }
 
 .movie-tagline {
-  margin-bottom: 14px;
+  margin-bottom: 13px;
 
-  color: #a9a9b4;
+  color: #9d9da8;
 
   font-size: 13px;
+
   font-style: italic;
 }
 
 .movie-details-meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
 
-  gap: 10px 18px;
+  gap: 9px 17px;
 
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 
-  color: #d4d4dc;
+  color: #d0d0d9;
 
-  font-size: 13px;
-}
-
-.movie-details-meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-
-  white-space: nowrap;
+  font-size: 12px;
 }
 
 .movie-genres {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
 
   gap: 7px;
 
-  margin-bottom: 18px;
+  margin-bottom: 17px;
 }
 
-.movie-genres span,
-.movie-genre {
-  display: inline-flex;
-  align-items: center;
-
+.movie-genres span {
   padding: 5px 9px;
 
   border: 1px solid #34343d;
   border-radius: 20px;
 
-  background: #1a1a21;
+  background: #1b1b22;
   color: #cfcfd7;
 
-  font-size: 11px;
-  line-height: 1;
-
-  white-space: nowrap;
+  font-size: 10px;
 }
 
 .movie-details-overview {
-  max-width: 700px;
+  max-width: 750px;
 
-  margin-bottom: 20px;
+  margin-bottom: 19px;
 
-  color: #bfc0c9;
+  color: #bcbcc6;
 
-  font-size: 14px;
-  line-height: 1.75;
+  font-size: 13px;
+  line-height: 1.7;
 
   overflow-wrap: anywhere;
 }
@@ -1113,22 +1034,17 @@ a {
 .movie-details-actions button {
   padding: 10px 14px;
 
-  border: 1px solid #383840;
+  border: 1px solid #363640;
   border-radius: 7px;
 
   background: #1c1c23;
   color: #ffffff;
 
   font-size: 12px;
-  font-weight: 600;
-}
-
-.movie-details-actions button:hover {
-  background: #28282f;
 }
 
 /* =====================================================
-   DETAILS SECTIONS
+   DETAILS SECTION
 ===================================================== */
 
 .details-section {
@@ -1136,13 +1052,13 @@ a {
 
   margin: 0 auto;
 
-  padding: 32px 0 8px;
+  padding: 28px 0 8px;
 }
 
 .details-section h2 {
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 
-  font-size: 23px;
+  font-size: 22px;
 }
 
 /* =====================================================
@@ -1161,9 +1077,9 @@ a {
 .stat-card {
   min-width: 0;
 
-  padding: 15px;
+  padding: 14px;
 
-  border: 1px solid #28282f;
+  border: 1px solid #292930;
   border-radius: 8px;
 
   background: #17171d;
@@ -1174,19 +1090,19 @@ a {
 
   color: #92929d;
 
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .stat-card h3 {
-  font-size: 16px;
-  line-height: 1.3;
+  font-size: 15px;
 
   overflow-wrap: anywhere;
 }
 
 .stat-card h3 span {
-  color: #777781;
-  font-size: 10px;
+  color: #767681;
+
+  font-size: 9px;
 }
 
 /* =====================================================
@@ -1197,7 +1113,7 @@ a {
   display: flex;
   flex-direction: column;
 
-  gap: 18px;
+  gap: 15px;
 }
 
 .watch-header {
@@ -1214,16 +1130,17 @@ a {
 
 .watch-header p {
   color: #92929d;
-  font-size: 12px;
+
+  font-size: 11px;
 }
 
 .watch-header select {
-  min-width: 170px;
-  height: 39px;
+  min-width: 165px;
+  height: 40px;
 
   padding: 0 10px;
 
-  border: 1px solid #303039;
+  border: 1px solid #33333d;
   border-radius: 7px;
 
   outline: none;
@@ -1231,23 +1148,24 @@ a {
   background: #0d0d12;
   color: #ffffff;
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .provider-group h3 {
-  margin-bottom: 10px;
-  font-size: 15px;
+  margin-bottom: 9px;
+
+  font-size: 14px;
 }
 
 .provider-list {
   display: flex;
   flex-wrap: wrap;
 
-  gap: 9px;
+  gap: 8px;
 }
 
 .provider-card {
-  min-width: 150px;
+  min-width: 145px;
 
   display: flex;
   align-items: center;
@@ -1256,7 +1174,7 @@ a {
 
   padding: 8px;
 
-  border: 1px solid #28282f;
+  border: 1px solid #292930;
   border-radius: 7px;
 
   background: #17171d;
@@ -1264,8 +1182,8 @@ a {
 
 .provider-card img,
 .provider-no-image {
-  width: 38px;
-  height: 38px;
+  width: 37px;
+  height: 37px;
 
   flex-shrink: 0;
 
@@ -1278,25 +1196,26 @@ a {
   display: grid;
   place-items: center;
 
-  background: #24242b;
+  background: #22222a;
   color: #ffffff;
 
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 9px;
 }
 
 .provider-card p {
   min-width: 0;
 
-  font-size: 11px;
+  color: #d2d2d9;
+
+  font-size: 10px;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.provider-empty,
-.provider-message {
+.provider-message,
+.provider-empty {
   padding: 25px 10px;
 
   color: #92929d;
@@ -1311,15 +1230,13 @@ a {
 }
 
 .provider-empty p {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .provider-link {
   width: fit-content;
 
-  display: inline-flex;
-
-  padding: 10px 14px;
+  padding: 9px 13px;
 
   border: 1px solid #373740;
   border-radius: 7px;
@@ -1327,13 +1244,14 @@ a {
   background: #1c1c23;
   color: #ffffff;
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
 }
 
 .provider-attribution {
-  color: #686872;
-  font-size: 10px;
+  color: #666670;
+
+  font-size: 9px;
 }
 
 /* =====================================================
@@ -1348,9 +1266,9 @@ a {
   width: 100%;
   max-width: 900px;
 
-  aspect-ratio: 16 / 9;
-
   margin: 0 auto;
+
+  aspect-ratio: 16 / 9;
 }
 
 .trailer-container iframe {
@@ -1375,7 +1293,7 @@ a {
   grid-template-columns:
     repeat(7, minmax(0, 1fr));
 
-  gap: 13px;
+  gap: 12px;
 
   align-items: start;
 }
@@ -1391,11 +1309,13 @@ a {
 
   background: #17171d;
 
-  transition: transform 0.2s ease;
+  cursor: pointer;
+
+  transition: transform 0.18s ease;
 }
 
 .cast-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
 }
 
 .cast-card img,
@@ -1413,16 +1333,16 @@ a {
   display: grid;
   place-items: center;
 
-  background: #202027;
-  color: #777781;
+  background: #22222a;
+  color: #7e7e89;
 
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .cast-info {
   min-width: 0;
 
-  padding: 9px;
+  padding: 8px;
 }
 
 .cast-info h3 {
@@ -1430,8 +1350,7 @@ a {
 
   color: #ffffff;
 
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 11px;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1439,10 +1358,9 @@ a {
 }
 
 .cast-info p {
-  color: #8f8f99;
+  color: #858590;
 
-  font-size: 10px;
-  line-height: 1.35;
+  font-size: 9px;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1453,10 +1371,6 @@ a {
    SIMILAR MOVIES
 ===================================================== */
 
-.similar-section {
-  width: min(1200px, calc(100% - 32px));
-}
-
 .similar-grid {
   width: 100%;
 
@@ -1465,7 +1379,7 @@ a {
   grid-template-columns:
     repeat(6, minmax(0, 1fr));
 
-  gap: 13px;
+  gap: 12px;
 
   align-items: start;
 }
@@ -1484,12 +1398,13 @@ a {
   cursor: pointer;
 
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .similar-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
+
   border-color: #50505a;
 }
 
@@ -1501,10 +1416,9 @@ a {
 
 .similar-card img {
   width: 100%;
+  height: auto;
 
   aspect-ratio: 2 / 3;
-
-  height: auto;
 
   display: block;
 
@@ -1517,20 +1431,21 @@ a {
 .similar-info {
   min-width: 0;
 
-  padding: 9px;
+  padding: 8px;
 }
 
 .similar-info h3 {
-  min-height: 34px;
+  min-height: 31px;
 
   margin-bottom: 5px;
 
   color: #ffffff;
 
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.35;
 
   overflow: hidden;
+
   text-overflow: ellipsis;
 
   display: -webkit-box;
@@ -1541,19 +1456,21 @@ a {
 .similar-info p {
   margin: 0;
 
-  color: #80808a;
+  color: #858590;
 
-  font-size: 10px;
+  font-size: 9px;
 }
 
 /* =====================================================
-   ACTOR PAGE
+   ACTOR DETAILS
 ===================================================== */
 
 .actor-details-page {
   width: min(1200px, calc(100% - 32px));
 
   margin: 0 auto;
+
+  padding: 38px 0 55px;
 
   overflow-x: hidden;
 }
@@ -1571,6 +1488,7 @@ a {
 
 .actor-profile-image {
   width: 200px;
+  min-width: 200px;
 
   flex-shrink: 0;
 }
@@ -1579,9 +1497,9 @@ a {
 .actor-no-image {
   width: 100%;
 
-  display: block;
-
   aspect-ratio: 2 / 3;
+
+  display: block;
 
   object-fit: cover;
 
@@ -1592,40 +1510,56 @@ a {
   display: grid;
   place-items: center;
 
-  background: #202027;
-  color: #777781;
-
-  font-size: 12px;
+  background: #22222a;
+  color: #7e7e89;
 }
 
 .actor-info {
   min-width: 0;
 }
 
-.actor-info h1 {
-  margin-bottom: 12px;
+.actor-label {
+  margin-bottom: 6px;
 
-  font-size: 39px;
+  color: #868691;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+.actor-info h1 {
+  margin-bottom: 13px;
+
+  font-size: 40px;
   line-height: 1.05;
 
   overflow-wrap: anywhere;
 }
 
 .actor-info p {
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 
-  color: #b4b4bf;
-  font-size: 13px;
+  color: #b7b7c2;
+
+  font-size: 12px;
 
   overflow-wrap: anywhere;
+}
+
+.actor-info h2 {
+  margin-top: 18px;
+  margin-bottom: 8px;
+
+  font-size: 18px;
 }
 
 .actor-biography {
   max-width: 760px;
 
-  margin-top: 17px;
+  color: #bcbcc7;
 
-  color: #c3c3cc;
+  font-size: 13px;
 
   line-height: 1.7;
 
@@ -1668,8 +1602,6 @@ a {
 
   aspect-ratio: 2 / 3;
 
-  height: auto;
-
   display: block;
 
   object-fit: cover;
@@ -1682,14 +1614,15 @@ a {
 }
 
 .actor-movie-info h3 {
-  min-height: 32px;
+  min-height: 31px;
 
   margin-bottom: 5px;
 
   font-size: 11px;
-  line-height: 1.4;
+  line-height: 1.35;
 
   overflow: hidden;
+
   text-overflow: ellipsis;
 
   display: -webkit-box;
@@ -1698,8 +1631,9 @@ a {
 }
 
 .actor-movie-info p {
-  color: #92929d;
-  font-size: 10px;
+  color: #858590;
+
+  font-size: 9px;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1707,11 +1641,70 @@ a {
 }
 
 /* =====================================================
-   404
+   FAVORITES / WATCHLIST / RECENTLY VIEWED
+===================================================== */
+
+.remove-favorite-button {
+  width: 100%;
+
+  margin-top: 7px;
+
+  padding: 7px;
+
+  border: 1px solid #383840;
+  border-radius: 6px;
+
+  background: #202027;
+  color: #ffffff;
+
+  font-size: 10px;
+}
+
+.favorite-button {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 30px;
+  height: 30px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.68);
+  color: #ffffff;
+
+  font-size: 12px;
+}
+
+.clear-history-button {
+  padding: 8px 12px;
+
+  border: 1px solid #34343d;
+  border-radius: 7px;
+
+  background: #1c1c23;
+  color: #ffffff;
+
+  font-size: 11px;
+}
+
+.recently-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+/* =====================================================
+   NOT FOUND
 ===================================================== */
 
 .not-found {
-  min-height: 75vh;
+  min-height: 70vh;
 
   display: flex;
   align-items: center;
@@ -1723,12 +1716,14 @@ a {
 }
 
 .not-found h1 {
-  margin-bottom: 6px;
-  font-size: 75px;
+  margin-bottom: 7px;
+
+  font-size: 72px;
 }
 
 .not-found h2 {
   margin-bottom: 8px;
+
   font-size: 28px;
 }
 
@@ -1738,129 +1733,28 @@ a {
   color: #92929d;
 }
 
-.not-found a {
-  display: inline-block;
-
-  padding: 10px 17px;
-
-  border-radius: 7px;
-
-  background: #ffffff;
-  color: #111111;
-
-  font-size: 12px;
-  font-weight: 700;
-}
-
 /* =====================================================
    FOOTER
 ===================================================== */
 
 .footer {
-  margin-top: 35px;
+  margin-top: 30px;
 
-  padding: 24px 15px;
+  padding: 23px 15px;
 
-  border-top: 1px solid #202027;
+  border-top: 1px solid #22222a;
 
   background: #08080c;
 
-  color: #6f6f79;
+  color: #676772;
 
   text-align: center;
 
-  font-size: 11px;
-}
-
-/* =====================================================
-   RECOMMENDATION SUPPORT
-   Kept harmless if recommendation component is unused.
-===================================================== */
-
-.recommendation-section {
-  width: 100%;
-
-  margin-top: 10px;
-  margin-bottom: 28px;
-
-  padding: 18px;
-
-  border: 1px solid #292930;
-  border-radius: 10px;
-
-  background: #111116;
-}
-
-.recommendation-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(6, minmax(0, 1fr));
-
-  gap: 13px;
-}
-
-.recommendation-card {
-  width: 100%;
-  min-width: 0;
-
-  overflow: hidden;
-
-  border: 1px solid #292930;
-  border-radius: 8px;
-
-  background: #17171d;
-}
-
-.recommendation-poster {
-  position: relative;
-
-  width: 100%;
-
-  aspect-ratio: 2 / 3;
-
-  overflow: hidden;
-
-  background: #1c1c23;
-}
-
-.recommendation-poster img {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  opacity: 1;
-  filter: none;
-}
-
-.recommendation-info {
-  padding: 9px;
-}
-
-.recommendation-info h3 {
-  min-height: 34px;
-
-  margin-bottom: 5px;
-
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.recommendation-info p {
-  color: #80808a;
   font-size: 10px;
 }
 
-.recommendation-poster span {
-  background: rgba(0, 0, 0, 0.68);
-  border-radius: 5px;
-}
-
 /* =====================================================
-   RESPONSIVE - 1100
+   TABLET
 ===================================================== */
 
 @media (max-width: 1100px) {
@@ -1871,8 +1765,7 @@ a {
   }
 
   .similar-grid,
-  .actor-movies-grid,
-  .recommendation-grid {
+  .actor-movies-grid {
     grid-template-columns:
       repeat(5, minmax(0, 1fr));
   }
@@ -1889,10 +1782,22 @@ a {
 }
 
 /* =====================================================
-   RESPONSIVE - 900
+   TABLET SMALL
 ===================================================== */
 
 @media (max-width: 900px) {
+  .navbar-inner {
+    flex-wrap: wrap;
+
+    padding: 9px 0;
+  }
+
+  .nav-links {
+    order: 3;
+
+    flex-basis: 100%;
+  }
+
   .movie-grid,
   .loading-grid {
     grid-template-columns:
@@ -1900,8 +1805,7 @@ a {
   }
 
   .similar-grid,
-  .actor-movies-grid,
-  .recommendation-grid {
+  .actor-movies-grid {
     grid-template-columns:
       repeat(4, minmax(0, 1fr));
   }
@@ -1911,12 +1815,23 @@ a {
       repeat(5, minmax(0, 1fr));
   }
 
+  .statistics-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .filters-row {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .clear-filter-btn {
+    grid-column: span 2;
+  }
+
   .movie-details-content {
-    min-height: auto;
-
-    padding: 45px 0;
-
     flex-direction: column;
+
     align-items: flex-start;
   }
 
@@ -1931,29 +1846,31 @@ a {
 
   .actor-profile-image {
     width: 190px;
+    min-width: 190px;
   }
 }
 
 /* =====================================================
-   RESPONSIVE - 650
+   MOBILE
 ===================================================== */
 
-@media (max-width: 650px) {
+@media (max-width: 600px) {
+
   .navbar-inner,
   .home-container,
   .page-container,
-  .movies-page,
-  .actor-page,
   .actor-details-page,
-  .details-section,
-  .featured-content {
+  .featured-content,
+  .details-section {
     width: calc(100% - 20px);
   }
+
+  /* NAVBAR */
 
   .navbar-inner {
     min-height: auto;
 
-    padding: 10px 0;
+    padding: 9px 0;
 
     flex-wrap: wrap;
 
@@ -1961,44 +1878,54 @@ a {
   }
 
   .brand {
-    font-size: 22px;
+    font-size: 21px;
+  }
+
+  .theme-toggle {
+    width: 35px;
+    height: 35px;
+
+    margin-left: auto;
   }
 
   .nav-links {
     order: 3;
 
-    flex-basis: 100%;
     width: 100%;
+    flex-basis: 100%;
 
     gap: 6px;
 
-    padding-bottom: 3px;
+    padding-bottom: 4px;
   }
 
   .nav-link {
-    min-height: 34px;
+    min-height: 35px;
 
     padding: 8px 10px;
 
     font-size: 10px;
   }
 
-  .theme-toggle {
-    margin-left: auto;
-  }
+  /* FEATURED */
 
-  .featured-movie {
+  .featured-movie,
+  .featured-content {
     min-height: 420px;
   }
 
   .featured-content {
-    min-height: 420px;
-
-    padding: 25px 0;
+    padding: 20px 0;
   }
 
   .featured-content h2 {
-    font-size: 34px;
+    font-size: 32px;
+  }
+
+  .featured-meta {
+    gap: 8px;
+
+    font-size: 11px;
   }
 
   .featured-overview {
@@ -2006,8 +1933,10 @@ a {
     line-height: 1.55;
   }
 
+  /* HOME */
+
   .home-container {
-    padding-top: 24px;
+    padding: 24px 0 40px;
   }
 
   .home-header h1 {
@@ -2018,27 +1947,87 @@ a {
     font-size: 11px;
   }
 
+  /* FILTER BOX */
+
   .filter-panel {
-    padding: 12px;
+    padding: 15px;
+
+    border-radius: 11px;
   }
 
   .search-box {
     flex-direction: column;
+
+    gap: 9px;
   }
 
-  .search-box input,
+  .search-box input {
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 15px;
+
+    font-size: 14px;
+  }
+
   .search-box button {
     width: 100%;
+
+    height: 47px;
+
+    font-size: 13px;
   }
 
   .filters-row {
+    width: 100%;
+
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(2, minmax(0, 1fr)) !important;
+
+    gap: 9px !important;
+  }
+
+  .filters-row select {
+    width: 100%;
+
+    height: 47px;
+
+    padding: 0 11px;
+
+    font-size: 12px;
   }
 
   .clear-filter-btn {
-    grid-column: span 2;
+    width: 100%;
+
+    height: 47px;
+
+    grid-column: span 2 !important;
+
+    font-size: 12px;
   }
+
+  /* AUTOCOMPLETE */
+
+  .autocomplete-dropdown {
+    max-height: 340px;
+  }
+
+  .autocomplete-item img {
+    width: 38px;
+    height: 54px;
+  }
+
+  .autocomplete-info h4 {
+    font-size: 11px;
+  }
+
+  .autocomplete-info p {
+    font-size: 9px;
+  }
+
+  /* MOVIE GRID */
 
   .movie-grid,
   .loading-grid {
@@ -2048,9 +2037,9 @@ a {
     gap: 10px !important;
   }
 
-  .movie-card:hover,
-  .similar-card:hover {
-    transform: none;
+  .movie-card {
+    max-width: none !important;
+    width: 100% !important;
   }
 
   .movie-card-content,
@@ -2060,23 +2049,14 @@ a {
 
   .movie-card-content h3,
   .movie-info h3 {
-    min-height: 30px;
+    min-height: 31px;
 
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .movie-card-content p,
   .movie-info p {
-    font-size: 9px;
-  }
-
-  .movie-card-actions {
-    padding: 0 7px 7px;
-  }
-
-  .movie-card-actions button {
-    width: 28px;
-    height: 26px;
+    font-size: 8px;
   }
 
   .movie-rating {
@@ -2088,10 +2068,18 @@ a {
     font-size: 8px;
   }
 
-  .page-container,
-  .movies-page {
-    padding-top: 25px;
-    padding-bottom: 40px;
+  .movie-card-actions {
+    padding: 0 7px 7px;
+  }
+
+  /* NORMAL PAGES */
+
+  .page-container {
+    padding: 25px 0 40px;
+  }
+
+  .page-header {
+    margin-bottom: 18px;
   }
 
   .page-header h1 {
@@ -2101,6 +2089,8 @@ a {
   .page-header p {
     font-size: 11px;
   }
+
+  /* DETAILS */
 
   .movie-details-content {
     width: calc(100% - 20px);
@@ -2125,32 +2115,36 @@ a {
   }
 
   .movie-details-meta {
-    gap: 8px 12px;
-    font-size: 11px;
+    gap: 8px 11px;
+
+    font-size: 10px;
+  }
+
+  .movie-genres {
+    gap: 5px;
+  }
+
+  .movie-genres span {
+    padding: 5px 7px;
+
+    font-size: 8px;
   }
 
   .movie-details-overview {
     font-size: 12px;
-    line-height: 1.65;
-  }
 
-  .movie-genres {
-    gap: 6px;
-  }
-
-  .movie-genres span,
-  .movie-genre {
-    padding: 5px 8px;
-    font-size: 9px;
+    line-height: 1.6;
   }
 
   .details-section {
-    padding-top: 25px;
+    padding-top: 24px;
   }
 
   .details-section h2 {
     font-size: 19px;
   }
+
+  /* STATISTICS */
 
   .statistics-grid {
     grid-template-columns:
@@ -2160,24 +2154,30 @@ a {
   }
 
   .stat-card {
-    padding: 11px;
+    padding: 10px;
   }
 
   .stat-card p {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .stat-card h3 {
     font-size: 12px;
   }
 
+  /* WATCH */
+
   .watch-header {
     flex-direction: column;
+
     align-items: stretch;
+
+    gap: 10px;
   }
 
   .watch-header select {
     width: 100%;
+
     min-width: 0;
   }
 
@@ -2186,19 +2186,23 @@ a {
   }
 
   .provider-card {
-    min-width: 0;
     width: 100%;
+    min-width: 0;
   }
+
+  /* TRAILER */
 
   .trailer-container {
     width: 100%;
   }
 
+  /* CAST */
+
   .cast-grid {
     grid-template-columns:
-      repeat(3, minmax(0, 1fr));
+      repeat(3, minmax(0, 1fr)) !important;
 
-    gap: 8px;
+    gap: 8px !important;
   }
 
   .cast-info {
@@ -2206,48 +2210,49 @@ a {
   }
 
   .cast-info h3 {
-    font-size: 9px;
-  }
-
-  .cast-info p {
     font-size: 8px;
   }
 
+  .cast-info p {
+    font-size: 7px;
+  }
+
+  /* SIMILAR MOVIES */
+
   .similar-grid,
-  .actor-movies-grid,
-  .recommendation-grid {
+  .actor-movies-grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr)) !important;
 
-    gap: 10px !important;
+    gap: 9px !important;
   }
 
   .similar-info,
-  .actor-movie-info,
-  .recommendation-info {
+  .actor-movie-info {
     padding: 7px;
   }
 
   .similar-info h3,
-  .actor-movie-info h3,
-  .recommendation-info h3 {
+  .actor-movie-info h3 {
     min-height: 30px;
 
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .similar-info p,
-  .actor-movie-info p,
-  .recommendation-info p {
+  .actor-movie-info p {
     font-size: 8px;
   }
 
+  /* ACTOR */
+
   .actor-details-page {
-    padding-top: 25px;
+    padding: 25px 0 40px;
   }
 
   .actor-profile-image {
     width: 155px;
+    min-width: 155px;
   }
 
   .actor-info h1 {
@@ -2260,12 +2265,15 @@ a {
 
   .actor-biography {
     font-size: 12px;
+
     line-height: 1.6;
   }
 
+  /* RECENTLY VIEWED */
+
   .recently-header {
-    display: flex;
     flex-direction: column;
+
     align-items: stretch;
   }
 
@@ -2273,37 +2281,27 @@ a {
     width: fit-content;
   }
 
-  .autocomplete-dropdown {
-    max-height: 350px;
-  }
+  /* EMPTY */
 
-  .autocomplete-item img {
-    width: 38px;
-    height: 54px;
-  }
-
-  .autocomplete-info h4 {
-    font-size: 11px;
-  }
-
-  .autocomplete-info p {
-    font-size: 9px;
+  .empty-state,
+  .empty-favorites,
+  .no-results {
+    padding: 42px 15px;
   }
 }
 
 /* =====================================================
-   RESPONSIVE - 380
+   SMALL PHONE
 ===================================================== */
 
 @media (max-width: 380px) {
+
   .navbar-inner,
   .home-container,
   .page-container,
-  .movies-page,
-  .actor-page,
   .actor-details-page,
-  .details-section,
-  .featured-content {
+  .featured-content,
+  .details-section {
     width: calc(100% - 16px);
   }
 
@@ -2313,11 +2311,41 @@ a {
 
   .nav-link {
     padding: 7px 8px;
+
     font-size: 9px;
   }
 
   .featured-content h2 {
-    font-size: 29px;
+    font-size: 28px;
+  }
+
+  .filter-panel {
+    padding: 13px;
+  }
+
+  .search-box input {
+    height: 48px;
+    font-size: 13px;
+  }
+
+  .search-box button {
+    height: 45px;
+  }
+
+  .filters-row {
+    gap: 8px !important;
+  }
+
+  .filters-row select {
+    height: 45px;
+
+    padding: 0 9px;
+
+    font-size: 11px;
+  }
+
+  .clear-filter-btn {
+    height: 45px;
   }
 
   .movie-grid,
@@ -2325,18 +2353,23 @@ a {
     gap: 8px !important;
   }
 
-  .movie-card-content h3,
-  .movie-info h3 {
-    font-size: 10px;
+  .movie-info,
+  .movie-card-content {
+    padding: 6px;
   }
 
-  .movie-card-content p,
-  .movie-info p {
-    font-size: 8px;
+  .movie-info h3,
+  .movie-card-content h3 {
+    font-size: 9px;
   }
 
-  .movie-details-content {
-    gap: 14px;
+  .movie-info p,
+  .movie-card-content p {
+    font-size: 7px;
+  }
+
+  .movie-rating {
+    font-size: 7px;
   }
 
   .movie-details-poster {
@@ -2349,7 +2382,7 @@ a {
   }
 
   .cast-grid {
-    gap: 7px;
+    gap: 7px !important;
   }
 
   .cast-info {
@@ -2357,203 +2390,15 @@ a {
   }
 
   .cast-info h3 {
-    font-size: 8px;
+    font-size: 7px;
   }
 
   .cast-info p {
-    font-size: 7px;
+    font-size: 6px;
   }
 
   .similar-grid,
   .actor-movies-grid {
-    gap: 8px !important;
-  }
-}
-/* =====================================================
-   MOBILE SEARCH & FILTER SIZE IMPROVEMENT
-===================================================== */
-
-@media (max-width: 650px) {
-  .filter-panel {
-    padding: 15px;
-  }
-
-  .search-box {
-    gap: 9px;
-    margin-bottom: 13px;
-  }
-
-  .search-box input {
-    height: 48px;
-    padding: 0 15px;
-    font-size: 14px;
-  }
-
-  .search-box button {
-    height: 46px;
-    font-size: 13px;
-  }
-
-  .filters-row {
-    grid-template-columns: repeat(
-      2,
-      minmax(0, 1fr)
-    ) !important;
-
-    gap: 10px !important;
-  }
-
-  .filters-row select {
-    height: 45px;
-    padding: 0 12px;
-    font-size: 12px;
-  }
-
-  .clear-filter-btn {
-    height: 45px;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 380px) {
-  .filter-panel {
-    padding: 13px;
-  }
-
-  .search-box input {
-    height: 46px;
-    font-size: 13px;
-  }
-
-  .search-box button {
-    height: 44px;
-  }
-
-  .filters-row {
-    gap: 8px !important;
-  }
-
-  .filters-row select {
-    height: 43px;
-    font-size: 11px;
-  }
-
-  .clear-filter-btn {
-    height: 43px;
-  }
-}
-/* =====================================================
-   FINAL MOBILE SEARCH + FILTER SIZE
-===================================================== */
-
-@media (max-width: 650px) {
-
-  .filter-panel {
-    width: 100% !important;
-    padding: 16px !important;
-    border-radius: 12px !important;
-  }
-
-  /* SEARCH */
-  .search-box {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    margin-bottom: 14px !important;
-  }
-
-  .search-box input {
-    width: 100% !important;
-    height: 52px !important;
-
-    padding: 0 16px !important;
-
-    font-size: 15px !important;
-
-    border-radius: 9px !important;
-  }
-
-  .search-box button {
-    width: 100% !important;
-    height: 48px !important;
-
-    padding: 0 16px !important;
-
-    font-size: 14px !important;
-
-    border-radius: 9px !important;
-  }
-
-  /* FILTERS */
-  .filters-row {
-    width: 100% !important;
-
-    display: grid !important;
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr)) !important;
-
-    gap: 10px !important;
-  }
-
-  .filters-row select {
-    width: 100% !important;
-    height: 48px !important;
-
-    min-width: 0 !important;
-
-    padding: 0 13px !important;
-
-    font-size: 13px !important;
-
-    border-radius: 9px !important;
-  }
-
-  .clear-filter-btn {
-    width: 100% !important;
-    height: 48px !important;
-
-    grid-column: span 2 !important;
-
-    font-size: 13px !important;
-
-    border-radius: 9px !important;
-  }
-}
-
-/* =====================================================
-   SMALL PHONE
-===================================================== */
-
-@media (max-width: 380px) {
-
-  .filter-panel {
-    padding: 13px !important;
-  }
-
-  .search-box input {
-    height: 50px !important;
-    font-size: 14px !important;
-  }
-
-  .search-box button {
-    height: 46px !important;
-    font-size: 13px !important;
-  }
-
-  .filters-row {
-    gap: 8px !important;
-  }
-
-  .filters-row select {
-    height: 46px !important;
-    padding: 0 11px !important;
-    font-size: 12px !important;
-  }
-
-  .clear-filter-btn {
-    height: 46px !important;
-    font-size: 12px !important;
+    gap: 7px !important;
   }
 }
