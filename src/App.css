@@ -1253,3 +1253,143 @@ main {
     font-size: 22px;
   }
 }
+/* =========================================================
+   FINAL FIXES
+   1. Dark mode button নিচে
+   2. Movie details poster ছোট
+   3. All Year / Genre dropdown ঠিক
+========================================================= */
+
+
+/* ---------- FILTER DROPDOWN ---------- */
+
+.filters select,
+.filter-select {
+  background: #151515 !important;
+  color: #ffffff !important;
+  border: 1px solid #333333 !important;
+
+  appearance: auto;
+  color-scheme: dark;
+}
+
+.filters select option,
+.filter-select option {
+  background: #151515 !important;
+  color: #ffffff !important;
+}
+
+
+/* ---------- MOVIE DETAILS POSTER ---------- */
+
+.details-header {
+  grid-template-columns: 240px minmax(0, 1fr) !important;
+}
+
+.details-poster {
+  width: 240px !important;
+  max-width: 240px !important;
+}
+
+.details-poster img {
+  width: 100% !important;
+  aspect-ratio: 2 / 3 !important;
+  object-fit: cover !important;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 768px) {
+
+  /* Dark mode option নিচে */
+  .navbar-inner {
+    position: relative;
+  }
+
+  .nav-actions {
+    order: 4 !important;
+
+    width: 100% !important;
+
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    margin-left: 0 !important;
+    padding-top: 4px;
+  }
+
+  .theme-toggle {
+    min-width: 42px !important;
+    height: 40px !important;
+  }
+
+
+  /* Movie details poster আরও ছোট */
+  .details-header {
+    grid-template-columns: 1fr !important;
+  }
+
+  .details-poster {
+    width: 210px !important;
+    max-width: 210px !important;
+
+    margin: 0 auto !important;
+  }
+
+  .details-poster img {
+    width: 210px !important;
+    max-width: 210px !important;
+  }
+
+
+  /* All Year / Genre */
+  .filters {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .filters select,
+  .filter-select {
+    width: 100% !important;
+
+    background: #151515 !important;
+    color: #ffffff !important;
+
+    font-size: 14px !important;
+
+    color-scheme: dark;
+  }
+
+  .filters select option,
+  .filter-select option {
+    background: #151515 !important;
+    color: #ffffff !important;
+  }
+}
+
+
+/* ---------- VERY SMALL PHONE ---------- */
+
+@media (max-width: 420px) {
+
+  .details-poster {
+    width: 190px !important;
+    max-width: 190px !important;
+  }
+
+  .details-poster img {
+    width: 190px !important;
+    max-width: 190px !important;
+  }
+
+  .filters {
+    gap: 8px !important;
+  }
+
+  .filters select,
+  .filter-select {
+    height: 44px !important;
+    font-size: 13px !important;
+  }
+}
