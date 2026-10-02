@@ -5,13 +5,14 @@ function Upcoming() {
   const navigate = useNavigate();
 
   const [movies, setMovies] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] =
+    useState(1);
+  const [totalPages, setTotalPages] =
+    useState(1);
 
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] =
     useState(false);
-
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -26,11 +27,6 @@ function Upcoming() {
 
         const data = await response.json();
 
-        console.log(
-          "UPCOMING RESPONSE:",
-          data
-        );
-
         if (!response.ok) {
           throw new Error(
             data.status_message ||
@@ -39,8 +35,14 @@ function Upcoming() {
           );
         }
 
-        setMovies(data.results || []);
+        setMovies(
+          (data.results || []).filter(
+            (movie) => movie.poster_path
+          )
+        );
+
         setCurrentPage(1);
+
         setTotalPages(
           data.total_pages || 1
         );
@@ -50,7 +52,10 @@ function Upcoming() {
           error
         );
 
-        setError(error.message);
+        setError(
+          error.message ||
+            "Failed to load upcoming movies."
+        );
       } finally {
         setLoading(false);
       }
@@ -93,11 +98,13 @@ function Upcoming() {
           )
         );
 
-        const newMovies =
-          (data.results || []).filter(
-            (movie) =>
-              !oldIds.has(movie.id)
-          );
+        const newMovies = (
+          data.results || []
+        ).filter(
+          (movie) =>
+            movie.poster_path &&
+            !oldIds.has(movie.id)
+        );
 
         return [
           ...oldMovies,
@@ -106,6 +113,7 @@ function Upcoming() {
       });
 
       setCurrentPage(nextPage);
+
       setTotalPages(
         data.total_pages || totalPages
       );
@@ -115,217 +123,115 @@ function Upcoming() {
         error
       );
 
-      setError(error.message);
+      setError(
+        error.message ||
+          "Failed to load more movies."
+      );
     } finally {
       setLoadingMore(false);
     }
   }
 
   return (
-    <div className="app">
+    <main className="page-container movies-page">
+      <section className="page-header">
+        <h1>📅 Upcoming Movies</h1>
 
-      <nav className="navbar">
+        <p>
+          Movies coming soon.
+        </p>
+      </section>
 
-        <h1
-          onClick={() =>
-            navigate("/")
-          }
-        >
-          CineScope
-        </h1>
-
-        <div className="nav-links">
-
-          <span
-            onClick={() =>
-              navigate("/")
-            }
-          >
-            Home
-          </span>
-
-          <span
-            onClick={() =>
-              navigate("/trending")
-            }
-          >
-            🔥 Trending
-          </span>
-
-          <span
-            onClick={() =>
-              navigate("/top-rated")
-            }
-          >
-            ⭐ Top Rated
-          </span>
-
-          <span className="active-link">
-            📅 Upcoming
-          </span>
-
-          <span
-            onClick={() =>
-              navigate("/favorites")
-            }
-          >
-            Favorites ❤️
-          </span>
-
+      {loading && (
+        <div className="page-status">
+          Loading upcoming movies...
         </div>
+      )}
 
-      </nav>
+      {!loading && error && (
+        <div className="page-error">
+          <h3>
+            Unable to load upcoming movies
+          </h3>
 
-      <main>
+          <p>{error}</p>
 
-        <section className="trending-heading">
+          <button
+            onClick={() =>
+              window.location.reload()
+            }
+          >
+            Try Again
+          </button>
+        </div>
+      )}
 
-          <h2>
-            📅 Upcoming Movies
-          </h2>
-
-          <p>
-            Movies coming soon.
-          </p>
-
-        </section>
-
-        {loading && (
-          <div className="trending-status">
-            <p className="loading">
-              Loading upcoming movies...
-            </p>
+      {!loading &&
+        !error &&
+        movies.length === 0 && (
+          <div className="page-status">
+            No upcoming movies found.
           </div>
         )}
 
-        {!loading &&
-          error && (
-            <div className="trending-error">
+      {!loading &&
+        !error &&
+        movies.length > 0 && (
+          <>
+            <div className="movie-grid">
+              {movies.map((movie) => (
+                <article
+                  className="movie-card"
+                  key={movie.id}
+                  onClick={() =>
+                    navigate(`/movie/${movie.id}`)
+                  }
+                >
+                  <div className="poster-wrapper">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      alt={movie.title}
+                      loading="lazy"
+                    />
 
-              <h3>
-                Unable to load upcoming movies
-              </h3>
+                    <span className="movie-rating">
+                      ⭐{" "}
+                      {movie.vote_average
+                        ? movie.vote_average.toFixed(
+                            1
+                          )
+                        : "N/A"}
+                    </span>
+                  </div>
 
-              <p>{error}</p>
+                  <div className="movie-info">
+                    <h3>{movie.title}</h3>
 
-              <button
-                onClick={() =>
-                  window.location.reload()
-                }
-              >
-                Try Again
-              </button>
-
+                    <p>
+                      {movie.release_date ||
+                        "Release date unknown"}
+                    </p>
+                  </div>
+                </article>
+              ))}
             </div>
-          )}
 
-        {!loading &&
-          !error &&
-          movies.length === 0 && (
-            <div className="trending-status">
-
-              <p className="loading">
-                No upcoming movies found.
-              </p>
-
-            </div>
-          )}
-
-        {!loading &&
-          !error &&
-          movies.length > 0 && (
-            <>
-
-              <div className="movie-grid">
-
-                {movies.map(
-                  (movie) => (
-
-                    <div
-                      className="movie-card"
-                      key={movie.id}
-                      onClick={() =>
-                        navigate(
-                          `/movie/${movie.id}`
-                        )
-                      }
-                    >
-
-                      <div className="poster-wrapper">
-
-                        {movie.poster_path ? (
-                          <img
-                            src={
-                              "https://image.tmdb.org/t/p/w500" +
-                              movie.poster_path
-                            }
-                            alt={movie.title}
-                          />
-                        ) : (
-                          <div className="no-poster">
-                            No Poster
-                          </div>
-                        )}
-
-                      </div>
-
-                      <div className="movie-info">
-
-                        <h3>
-                          {movie.title}
-                        </h3>
-
-                        <p>
-                          ⭐{" "}
-                          {movie.vote_average
-                            ? movie.vote_average.toFixed(
-                                1
-                              )
-                            : "N/A"}
-                        </p>
-
-                        <p>
-                          📅{" "}
-                          {movie.release_date ||
-                            "Release date unknown"}
-                        </p>
-
-                      </div>
-
-                    </div>
-
-                  )
-                )}
-
+            {currentPage < totalPages && (
+              <div className="load-more-container">
+                <button
+                  className="load-more"
+                  onClick={loadMoreMovies}
+                  disabled={loadingMore}
+                >
+                  {loadingMore
+                    ? "Loading..."
+                    : "Load More"}
+                </button>
               </div>
-
-              {currentPage <
-                totalPages && (
-                <div className="load-more-container">
-
-                  <button
-                    className="load-more"
-                    onClick={
-                      loadMoreMovies
-                    }
-                    disabled={
-                      loadingMore
-                    }
-                  >
-                    {loadingMore
-                      ? "Loading..."
-                      : "Load More"}
-                  </button>
-
-                </div>
-              )}
-
-            </>
-          )}
-
-      </main>
-
-    </div>
+            )}
+          </>
+        )}
+    </main>
   );
 }
 

@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 function Watchlist() {
   const navigate = useNavigate();
 
-  const [watchlist, setWatchlist] = useState([]);
+  const [watchlist, setWatchlist] =
+    useState([]);
 
   useEffect(() => {
     const savedWatchlist =
       JSON.parse(
-        localStorage.getItem("watchlist")
+        localStorage.getItem(
+          "watchlist"
+        )
       ) || [];
 
     setWatchlist(savedWatchlist);
@@ -30,185 +33,94 @@ function Watchlist() {
   }
 
   return (
-    <div className="app">
+    <main className="page-container movies-page">
+      <section className="page-header">
+        <h1>📺 My Watchlist</h1>
 
-      <nav className="navbar">
+        <p>
+          Movies you saved to watch later.
+        </p>
+      </section>
 
-        <h1
-          onClick={() => navigate("/")}
-        >
-          CineScope
-        </h1>
+      {watchlist.length === 0 ? (
+        <div className="empty-state">
+          <h2>Your watchlist is empty.</h2>
 
-        <div className="nav-links">
+          <p>
+            Add movies you want to watch later.
+          </p>
 
-          <span
-            onClick={() => navigate("/")}
-          >
-            Home
-          </span>
-
-          <span
+          <button
+            className="load-more"
             onClick={() =>
-              navigate("/trending")
+              navigate("/")
             }
           >
-            🔥 Trending
-          </span>
-
-          <span
-            onClick={() =>
-              navigate("/top-rated")
-            }
-          >
-            ⭐ Top Rated
-          </span>
-
-          <span
-            onClick={() =>
-              navigate("/upcoming")
-            }
-          >
-            📅 Upcoming
-          </span>
-
-          <span
-            onClick={() =>
-              navigate("/favorites")
-            }
-          >
-            Favorites ❤️
-          </span>
-
-          <span className="active-link">
-            Watchlist 📺
-          </span>
-
+            🎬 Browse Movies
+          </button>
         </div>
-
-      </nav>
-
-      <main>
-
-        <section className="section-header">
-
-          <h2>
-            My Watchlist 📺
-          </h2>
-
-        </section>
-
-        {watchlist.length === 0 ? (
-
-          <div className="empty-favorites">
-
-            <h3>
-              Your watchlist is empty.
-            </h3>
-
-            <p>
-              Add movies you want to watch
-              later.
-            </p>
-
-            <button
-              className="load-more"
+      ) : (
+        <div className="movie-grid">
+          {watchlist.map((movie) => (
+            <article
+              className="movie-card"
+              key={movie.id}
               onClick={() =>
-                navigate("/")
+                navigate(
+                  `/movie/${movie.id}`
+                )
               }
             >
-              Browse Movies
-            </button>
+              <div className="poster-wrapper">
+                {movie.poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="no-poster">
+                    No Poster
+                  </div>
+                )}
 
-          </div>
+                <button
+                  className="favorite-button"
+                  onClick={(event) => {
+                    event.stopPropagation();
 
-        ) : (
-
-          <div className="movie-grid">
-
-            {watchlist.map((movie) => (
-
-              <div
-                className="movie-card"
-                key={movie.id}
-                onClick={() =>
-                  navigate(
-                    `/movie/${movie.id}`
-                  )
-                }
-              >
-
-                <div className="poster-wrapper">
-
-                  {movie.poster_path ? (
-
-                    <img
-                      src={
-                        "https://image.tmdb.org/t/p/w500" +
-                        movie.poster_path
-                      }
-                      alt={movie.title}
-                    />
-
-                  ) : (
-
-                    <div className="no-poster">
-                      No Poster
-                    </div>
-
-                  )}
-
-                  <button
-                    className="favorite-button"
-                    onClick={(e) => {
-
-                      e.stopPropagation();
-
-                      removeFromWatchlist(
-                        movie.id
-                      );
-
-                    }}
-                    title="Remove from watchlist"
-                  >
-                    ❌
-                  </button>
-
-                </div>
-
-                <div className="movie-info">
-
-                  <h3>
-                    {movie.title}
-                  </h3>
-
-                  <p>
-                    ⭐{" "}
-                    {movie.vote_average
-                      ? movie.vote_average.toFixed(
-                          1
-                        )
-                      : "N/A"}
-                  </p>
-
-                  <p>
-                    {movie.release_date ||
-                      "Release date unknown"}
-                  </p>
-
-                </div>
-
+                    removeFromWatchlist(
+                      movie.id
+                    );
+                  }}
+                  title="Remove from watchlist"
+                >
+                  ❌
+                </button>
               </div>
 
-            ))}
+              <div className="movie-info">
+                <h3>{movie.title}</h3>
 
-          </div>
+                <p>
+                  ⭐{" "}
+                  {movie.vote_average
+                    ? movie.vote_average.toFixed(
+                        1
+                      )
+                    : "N/A"}
+                </p>
 
-        )}
-
-      </main>
-
-    </div>
+                <p>
+                  {movie.release_date ||
+                    "Release date unknown"}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </main>
   );
 }
 
